@@ -1,0 +1,6 @@
+{
+  "name": "StudySync",
+  "description": "Smart Academic Management & Collaborative Learning Platform for Administrators, Faculty, and Students.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

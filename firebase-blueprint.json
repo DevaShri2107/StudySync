@@ -1,0 +1,177 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Registered user profile in StudySync platform",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "fullName": { "type": "string", "maxLength": 100 },
+        "role": { "type": "string", "enum": ["Administrator", "Faculty", "Student"] },
+        "employeeId": { "type": "string" },
+        "registerNumber": { "type": "string" },
+        "department": { "type": "string" },
+        "year": { "type": "string" },
+        "section": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "email", "fullName", "role", "createdAt"]
+    },
+    "AttendanceSession": {
+      "title": "Attendance Session",
+      "description": "Logged class attendance session record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "date": { "type": "string" },
+        "subject": { "type": "string" },
+        "department": { "type": "string" },
+        "year": { "type": "string" },
+        "section": { "type": "string" },
+        "facultyId": { "type": "string" },
+        "facultyName": { "type": "string" },
+        "totalStudents": { "type": "integer" },
+        "presentCount": { "type": "integer" },
+        "absentCount": { "type": "integer" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "date", "subject", "department", "year", "section", "facultyId"]
+    },
+    "Assignment": {
+      "title": "Assignment",
+      "description": "Faculty coursework assignment",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "subject": { "type": "string" },
+        "description": { "type": "string" },
+        "deadline": { "type": "string" },
+        "priority": { "type": "string", "enum": ["High", "Medium", "Low"] },
+        "attachmentName": { "type": "string" },
+        "attachmentUrl": { "type": "string" },
+        "department": { "type": "string" },
+        "year": { "type": "string" },
+        "section": { "type": "string" },
+        "facultyId": { "type": "string" },
+        "facultyName": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "title", "subject", "deadline", "department", "year", "section", "facultyId"]
+    },
+    "AssignmentSubmission": {
+      "title": "Assignment Submission",
+      "description": "Student coursework submission with Google Drive upload",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "assignmentId": { "type": "string" },
+        "studentId": { "type": "string" },
+        "studentName": { "type": "string" },
+        "registerNumber": { "type": "string" },
+        "driveFileUrl": { "type": "string" },
+        "fileName": { "type": "string" },
+        "fileSize": { "type": "string" },
+        "submittedAt": { "type": "string" },
+        "status": { "type": "string", "enum": ["Submitted", "Graded"] },
+        "grade": { "type": "string" },
+        "feedback": { "type": "string" }
+      },
+      "required": ["id", "assignmentId", "studentId", "driveFileUrl", "submittedAt"]
+    },
+    "NoteItem": {
+      "title": "Study Note",
+      "description": "Uploaded study material and course notes",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "subject": { "type": "string" },
+        "description": { "type": "string" },
+        "fileType": { "type": "string", "enum": ["pdf", "ppt", "docx", "image"] },
+        "fileName": { "type": "string" },
+        "fileSize": { "type": "string" },
+        "driveFileUrl": { "type": "string" },
+        "department": { "type": "string" },
+        "year": { "type": "string" },
+        "section": { "type": "string" },
+        "facultyId": { "type": "string" },
+        "facultyName": { "type": "string" },
+        "uploadedAt": { "type": "string" }
+      },
+      "required": ["id", "title", "subject", "department", "year", "section", "facultyId"]
+    },
+    "StudySession": {
+      "title": "Study Session",
+      "description": "Scheduled live study session with Google Meet & Calendar",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "topic": { "type": "string" },
+        "subject": { "type": "string" },
+        "description": { "type": "string" },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "durationMinutes": { "type": "integer" },
+        "department": { "type": "string" },
+        "year": { "type": "string" },
+        "section": { "type": "string" },
+        "facultyId": { "type": "string" },
+        "facultyName": { "type": "string" },
+        "meetingUrl": { "type": "string" },
+        "calendarUrl": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "topic", "subject", "date", "time", "department", "year", "section", "facultyId"]
+    },
+    "Announcement": {
+      "title": "Announcement",
+      "description": "Broadcast announcement to students",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "priority": { "type": "string", "enum": ["Normal", "Important", "Urgent"] },
+        "department": { "type": "string" },
+        "year": { "type": "string" },
+        "section": { "type": "string" },
+        "facultyId": { "type": "string" },
+        "facultyName": { "type": "string" },
+        "postedAt": { "type": "string" }
+      },
+      "required": ["id", "title", "message", "department", "year", "section", "facultyId"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profile collection"
+    },
+    "/attendance_sessions/{sessionId}": {
+      "schema": { "$ref": "#/entities/AttendanceSession" },
+      "description": "Class attendance records"
+    },
+    "/assignments/{assignmentId}": {
+      "schema": { "$ref": "#/entities/Assignment" },
+      "description": "Course assignments"
+    },
+    "/assignment_submissions/{submissionId}": {
+      "schema": { "$ref": "#/entities/AssignmentSubmission" },
+      "description": "Student assignment submissions with Google Drive files"
+    },
+    "/notes/{noteId}": {
+      "schema": { "$ref": "#/entities/NoteItem" },
+      "description": "Study notes with Google Drive files"
+    },
+    "/study_sessions/{sessionId}": {
+      "schema": { "$ref": "#/entities/StudySession" },
+      "description": "Scheduled live study sessions with Google Meet and Calendar"
+    },
+    "/announcements/{announcementId}": {
+      "schema": { "$ref": "#/entities/Announcement" },
+      "description": "Broadcast announcements"
+    }
+  }
+}
