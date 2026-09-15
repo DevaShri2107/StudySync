@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
 import { StudentUser, FacultyUser } from '../../types';
-import { User, Shield, Mail, Lock, Moon, Sun, LogOut, Check, Building, GraduationCap, Award, Eye, EyeOff } from 'lucide-react';
+import { User, Shield, Mail, Lock, Moon, Sun, LogOut, Check, Building, GraduationCap, Award, Eye, EyeOff, Layers } from 'lucide-react';
+import { ConnectedServicesModal } from '../common/ConnectedServicesModal';
 
 export const UserProfile: React.FC = () => {
   const { currentUser, logout, resetUserPassword } = useAuth();
@@ -13,6 +14,7 @@ export const UserProfile: React.FC = () => {
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [msg, setMsg] = useState({ text: '', error: false });
+  const [isServicesModalOpen, setIsServicesModalOpen] = useState(false);
 
   if (!currentUser) return null;
 
@@ -175,12 +177,33 @@ export const UserProfile: React.FC = () => {
           <div className="p-4 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/50 text-xs text-indigo-900 dark:text-indigo-200 space-y-1">
             <p className="font-bold">🔐 Security Lock</p>
             <p className="text-[11px] text-indigo-700 dark:text-indigo-300">
-              Your account is locked to the official domain <span className="font-mono font-bold">@studysync.com</span> with role-based access rules.
+              Your account is verified with your official domain <span className="font-mono font-bold">@gmail.com</span> with role-based access rules.
             </p>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 flex items-center justify-between">
+            <div>
+              <p className="text-xs font-bold text-slate-900 dark:text-white">Google Workspace Integrations</p>
+              <p className="text-[11px] text-slate-500">Manage Google Drive, Calendar, Meet & Gmail</p>
+            </div>
+
+            <button
+              onClick={() => setIsServicesModalOpen(true)}
+              className="p-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white flex items-center gap-1.5 text-xs font-semibold shadow-xs"
+            >
+              <Layers className="h-4 w-4" />
+              Manage Services
+            </button>
           </div>
         </div>
 
       </div>
+
+      {/* Connected Services Modal */}
+      <ConnectedServicesModal
+        isOpen={isServicesModalOpen}
+        onClose={() => setIsServicesModalOpen(false)}
+      />
 
     </div>
   );

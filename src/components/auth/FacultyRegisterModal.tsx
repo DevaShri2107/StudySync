@@ -65,7 +65,7 @@ export const FacultyRegisterModal: React.FC<FacultyRegisterModalProps> = ({
             Faculty Registration
           </h2>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-            Register your faculty account with your official <span className="font-semibold text-indigo-600">@studysync.com</span> email.
+            Register your faculty account with your official <span className="font-semibold text-indigo-600">@gmail.com</span> email.
           </p>
         </div>
 
@@ -125,18 +125,18 @@ export const FacultyRegisterModal: React.FC<FacultyRegisterModalProps> = ({
 
           <div>
             <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
-              Faculty Email (@studysync.com) *
+              Faculty Email *
             </label>
             <input
               type="email"
               required
-              placeholder="faculty@studysync.com"
+              placeholder="faculty@gmail.com"
               value={formData.email}
               onChange={e => setFormData({ ...formData, email: e.target.value })}
               className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/80 px-3 py-2 text-xs text-slate-900 dark:text-white focus:border-indigo-500 focus:outline-none"
             />
-            {formData.email && !formData.email.trim().toLowerCase().endsWith('@studysync.com') && (
-              <p className="text-[10px] text-red-500 mt-1">Must strictly end with @studysync.com</p>
+            {formData.email && !formData.email.trim().toLowerCase().endsWith('@gmail.com') && !formData.email.trim().toLowerCase().endsWith('@studysync.com') && (
+              <p className="text-[10px] text-red-500 mt-1">Must end with @gmail.com or @studysync.com</p>
             )}
           </div>
 

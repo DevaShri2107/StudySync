@@ -366,10 +366,10 @@ export const AdminSettings: React.FC = () => {
             <Lock className="h-5 w-5 text-indigo-600" /> Authentication Domain Lock Rule
           </h3>
           <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-            Per strict security guidelines, all user registrations (Faculty & Student) must strictly end with <span className="font-mono font-bold text-indigo-600">@studysync.com</span>. Any external email providers (e.g., gmail.com) are automatically rejected during sign up.
+            Per strict security guidelines, all user registrations (Faculty & Student) must strictly end with <span className="font-mono font-bold text-indigo-600">@gmail.com</span> for official Google Workspace integration.
           </p>
           <div className="mt-3 p-3 rounded-2xl bg-indigo-50 dark:bg-indigo-950/40 text-xs font-mono text-indigo-700 dark:text-indigo-300">
-            ✅ Domain Restriction: @studysync.com (ACTIVE)
+            ✅ Domain Requirement: @gmail.com (ACTIVE)
           </div>
         </div>
 

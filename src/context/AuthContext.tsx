@@ -113,6 +113,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       savePasswordStore(passStore);
       setUsers(remoteUsers);
       localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(remoteUsers));
+
+      // Clean up local session if the cached user was deleted
+      const savedUserStr = localStorage.getItem(CURRENT_USER_STORAGE_KEY);
+      if (savedUserStr) {
+        try {
+          const parsedUser = JSON.parse(savedUserStr);
+          if (parsedUser && !remoteUsers.some(u => u.id === parsedUser.id)) {
+            setCurrentUser(null);
+            localStorage.removeItem(CURRENT_USER_STORAGE_KEY);
+          }
+        } catch {
+          // ignore parsing error
+        }
+      }
     }, (error) => {
       console.warn('Firestore users snapshot warning (falling back to offline local data):', error);
     });
@@ -134,7 +148,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const validateEmail = (email: string): boolean => {
     const cleanEmail = email.trim().toLowerCase();
-    return cleanEmail.endsWith('@studysync.com');
+    return cleanEmail.endsWith('@gmail.com') || cleanEmail.endsWith('@studysync.com');
   };
 
   const validatePassword = (password: string): { isValid: boolean; message?: string } => {
@@ -160,7 +174,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const cleanEmail = email.trim().toLowerCase();
     
     if (!validateEmail(cleanEmail)) {
-      return { success: false, error: 'Access denied: Only emails ending with @studysync.com are allowed.' };
+      return { success: false, error: 'Access denied: All user email accounts must end with @gmail.com or @studysync.com.' };
     }
 
     const foundUser = users.find(u => u.email.toLowerCase() === cleanEmail);
@@ -195,7 +209,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const cleanEmpId = data.employeeId.trim().toUpperCase();
 
     if (!validateEmail(cleanEmail)) {
-      return { success: false, error: 'Email must strictly end with @studysync.com' };
+      return { success: false, error: 'Email must end with @gmail.com or @studysync.com' };
     }
 
     if (data.password !== data.confirmPassword) {
@@ -259,7 +273,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const cleanRegNo = data.registerNumber.trim().toUpperCase();
 
     if (!validateEmail(cleanEmail)) {
-      return { success: false, error: 'Email must strictly end with @studysync.com' };
+      return { success: false, error: 'Email must end with @gmail.com or @studysync.com' };
     }
 
     if (!data.department || !data.year || !data.section) {

@@ -16,7 +16,7 @@ import {
 
 export const DEFAULT_ADMIN: AdminUser = {
   id: 'admin_default_01',
-  email: 'admin@studysync.com',
+  email: 'admin@gmail.com',
   fullName: 'System Administrator',
   role: 'Administrator',
   createdAt: new Date().toISOString()
@@ -53,7 +53,7 @@ export const DEFAULT_SECTIONS: Section[] = [
 export const DEMO_FACULTY: FacultyUser[] = [
   {
     id: 'fac_1',
-    email: 'dr.sharma@studysync.com',
+    email: 'dr.sharma@gmail.com',
     fullName: 'Dr. Rajesh Sharma',
     role: 'Faculty',
     employeeId: 'EMP-2023-01',
@@ -62,7 +62,7 @@ export const DEMO_FACULTY: FacultyUser[] = [
   },
   {
     id: 'fac_2',
-    email: 'prof.ananya@studysync.com',
+    email: 'prof.ananya@gmail.com',
     fullName: 'Prof. Ananya Roy',
     role: 'Faculty',
     employeeId: 'EMP-2023-02',
@@ -74,7 +74,7 @@ export const DEMO_FACULTY: FacultyUser[] = [
 export const DEMO_STUDENTS: StudentUser[] = [
   {
     id: 'std_1',
-    email: 'student001@studysync.com',
+    email: 'student001@gmail.com',
     fullName: 'Arjun Kumar',
     role: 'Student',
     registerNumber: 'REG-2023-001',
@@ -85,7 +85,7 @@ export const DEMO_STUDENTS: StudentUser[] = [
   },
   {
     id: 'std_2',
-    email: 'student002@studysync.com',
+    email: 'student002@gmail.com',
     fullName: 'Priya Verma',
     role: 'Student',
     registerNumber: 'REG-2023-002',
@@ -96,7 +96,7 @@ export const DEMO_STUDENTS: StudentUser[] = [
   },
   {
     id: 'std_3',
-    email: 'student003@studysync.com',
+    email: 'student003@gmail.com',
     fullName: 'Rohan Mehta',
     role: 'Student',
     registerNumber: 'REG-2023-003',
@@ -107,7 +107,7 @@ export const DEMO_STUDENTS: StudentUser[] = [
   },
   {
     id: 'std_4',
-    email: 'student004@studysync.com',
+    email: 'student004@gmail.com',
     fullName: 'Sneha Patel',
     role: 'Student',
     registerNumber: 'REG-2023-004',
@@ -245,7 +245,7 @@ export const DEMO_SESSIONS: StudySession[] = [
     section: 'Section A',
     facultyId: 'fac_1',
     facultyName: 'Dr. Rajesh Sharma',
-    meetingUrl: 'https://meet.studysync.com/cse-3a-review',
+    meetingUrl: 'https://meet.google.com/cse-rsh-rev',
     createdAt: new Date().toISOString()
   }
 ];

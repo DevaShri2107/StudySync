@@ -9,9 +9,11 @@ import {
   Bell,
   LogOut,
   Database,
-  Sparkles
+  Sparkles,
+  Layers
 } from 'lucide-react';
 import { NotificationDrawer } from './NotificationDrawer';
+import { ConnectedServicesModal } from './ConnectedServicesModal';
 
 interface HeaderProps {
   activeTab: string;
@@ -33,6 +35,7 @@ export const Header: React.FC<HeaderProps> = ({
   const { notifications, isDemoLoaded, seedDemoData, resetToCleanDatabase } = useData();
 
   const [isNotifOpen, setIsNotifOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
 
   // Unread count
   const unreadNotifs = currentUser
@@ -137,6 +140,18 @@ export const Header: React.FC<HeaderProps> = ({
               {theme === 'light' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5 text-amber-400" />}
             </button>
 
+            {/* Google Workspace Connected Services Button */}
+            {currentUser && (
+              <button
+                onClick={() => setIsServicesOpen(true)}
+                className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-all border border-slate-200/80 dark:border-slate-700"
+                title="Google Workspace Services (Drive, Meet, Calendar, Gmail)"
+              >
+                <Layers className="h-4 w-4 text-indigo-500" />
+                <span>Google Services</span>
+              </button>
+            )}
+
             {/* User Profile Pill & Logout / Login */}
             {currentUser ? (
               <div className="flex items-center gap-2 pl-2 border-l border-slate-200 dark:border-slate-800">
@@ -172,6 +187,9 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Notification Drawer */}
       <NotificationDrawer isOpen={isNotifOpen} onClose={() => setIsNotifOpen(false)} />
+
+      {/* Google Workspace Connected Services Modal */}
+      <ConnectedServicesModal isOpen={isServicesOpen} onClose={() => setIsServicesOpen(false)} />
     </>
   );
 };

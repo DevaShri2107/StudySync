@@ -56,7 +56,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
             Sign In to StudySync
           </h2>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-            Access your academic portal with your <span className="font-semibold text-indigo-600 dark:text-indigo-400">@studysync.com</span> email.
+            Access your academic portal with your <span className="font-semibold text-indigo-600 dark:text-indigo-400">@gmail.com</span> email.
           </p>
         </div>
 
@@ -67,17 +67,18 @@ export const LoginModal: React.FC<LoginModalProps> = ({
           </div>
         )}
 
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
-              Email Address (@studysync.com)
+              Email Address
             </label>
             <div className="relative">
               <Mail className="absolute left-3.5 top-3 h-4 w-4 text-slate-400" />
               <input
                 type="email"
                 required
-                placeholder="user@studysync.com"
+                placeholder="user@gmail.com"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/80 pl-10 pr-4 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
