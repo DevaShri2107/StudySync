@@ -2,7 +2,6 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Helper functions
     function isAuthenticated() {
       return request.auth != null;
     }
@@ -37,7 +36,6 @@ service cloud.firestore {
       return get(/databases/$(database)/documents/Students/$(request.auth.uid)).data;
     }
 
-    // 1. Users collection
     match /Users/{userId} {
       allow read: if isAuthenticated();
       allow create: if isAuthenticated() && (request.auth.uid == userId || isAdmin());
@@ -45,7 +43,6 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
-    // 2. Students collection
     match /Students/{studentId} {
       allow read: if isAuthenticated();
       allow create: if isAuthenticated() && (request.auth.uid == studentId || isAdmin());
@@ -53,7 +50,6 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
-    // 3. Faculty collection
     match /Faculty/{facultyId} {
       allow read: if isAuthenticated();
       allow create: if isAuthenticated() && (request.auth.uid == facultyId || isAdmin());
@@ -61,7 +57,6 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
-    // 4. Academic Structure (Departments, Years, Sections, Subjects)
     match /Departments/{deptId} {
       allow read: if isAuthenticated();
       allow write: if isAdmin();
@@ -79,7 +74,6 @@ service cloud.firestore {
       allow write: if isAdmin() || isFaculty();
     }
 
-    // 5. Attendance
     match /Attendance/{attendanceId} {
       allow read: if isAuthenticated() && (
         isAdmin() ||
@@ -90,7 +84,6 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
-    // 6. Assignments
     match /Assignments/{assignmentId} {
       allow read: if isAuthenticated() && (
         isAdmin() ||
@@ -103,7 +96,6 @@ service cloud.firestore {
       allow create, update, delete: if isAuthenticated() && (isAdmin() || isFaculty());
     }
 
-    // 7. Assignment Submissions
     match /AssignmentSubmissions/{submissionId} {
       allow read: if isAuthenticated() && (
         isAdmin() ||
@@ -119,7 +111,6 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
-    // 8. Notes
     match /Notes/{noteId} {
       allow read: if isAuthenticated() && (
         isAdmin() ||
@@ -132,14 +123,12 @@ service cloud.firestore {
       allow create, update, delete: if isAuthenticated() && (isAdmin() || isFaculty());
     }
 
-    // 9. Study Planner
     match /StudyPlanner/{taskId} {
       allow read, write: if isAuthenticated() && (
         resource == null || resource.data.studentId == request.auth.uid || isAdmin()
       );
     }
 
-    // 10. Study Sessions
     match /StudySessions/{sessionId} {
       allow read: if isAuthenticated() && (
         isAdmin() ||
@@ -152,7 +141,6 @@ service cloud.firestore {
       allow create, update, delete: if isAuthenticated() && (isAdmin() || isFaculty());
     }
 
-    // 11. Announcements
     match /Announcements/{announcementId} {
       allow read: if isAuthenticated() && (
         isAdmin() ||
@@ -165,7 +153,6 @@ service cloud.firestore {
       allow create, update, delete: if isAuthenticated() && (isAdmin() || isFaculty());
     }
 
-    // 12. Notifications
     match /Notifications/{notificationId} {
       allow read: if isAuthenticated() && (
         isAdmin() ||
@@ -179,7 +166,6 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
-    // 13. Reports and Settings
     match /Reports/{reportId} {
       allow read: if isAuthenticated() && (isAdmin() || isFaculty());
       allow write: if isAdmin();
